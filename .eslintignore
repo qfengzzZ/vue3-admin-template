@@ -1,0 +1,9 @@
+# 忽略目录
+build/
+dist/
+tests/
+node_modules/
+assets/
+
+# node 覆盖率文件
+coverage/
