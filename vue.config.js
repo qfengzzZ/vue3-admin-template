@@ -13,16 +13,16 @@ module.exports = {
 	runtimeCompiler: true,
 	productionSourceMap: process.env.VUE_APP_ENV === 'testing', // 该配置项用于设置是否为生产环境构建生成 source map，一般在生产环境下为了快速定位错误信息,开发环境或者测试环境为true,线上为false
 	devServer: {
-		proxy: {
-			'/api': {
-				target: '',
-				// 路径重写
-				pathRewrite: {
-					'^/api': ''
-				},
-				changeOrigin: true
-			}
-		}
+		// proxy: {
+		// 	'/api': {
+		// 		target: '',
+		// 		// 路径重写
+		// 		pathRewrite: {
+		// 			'^/api': ''
+		// 		},
+		// 		changeOrigin: true
+		// 	}
+		// }
 	},
 	css: {
 		loaderOptions: {
