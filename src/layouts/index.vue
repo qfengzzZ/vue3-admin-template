@@ -6,11 +6,13 @@
 		<el-container class="e-layout-inside" :class="insideClasses">
 			<el-header class="e-layout-header" :class="headerClasses" :style="headerStyle" height="64px">
 				<e-header-collapse />
+				<e-header-refresh />
 				<e-header-breadcrumb />
 				<div class="e-layout-header-right">
 					<e-header-user />
 				</div>
 			</el-header>
+			<e-header-tabs />
 			<el-main class="e-layout-content e-layout-content-fix-with-header">
 				<div class="e-layout-content-main">
 					<router-view v-slot="{ Component, route }">
@@ -37,9 +39,11 @@ export default {
 <script setup>
 import EMenuSide from './menu-side'
 import EHeaderCollapse from './header-collapse'
+import EHeaderRefresh from './header-refresh'
 import EHeaderBreadcrumb from './header-breadcrumb'
 import EHeaderUser from './header-user'
-import ECopyright from '@/components/Copyright'
+import EHeaderTabs from './header-tabs'
+import ECopyright from '@/components/copyright'
 import { computed, reactive } from 'vue'
 import { useStore } from 'vuex'
 

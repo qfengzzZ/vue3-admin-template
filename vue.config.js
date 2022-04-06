@@ -24,11 +24,6 @@ module.exports = {
 		// 	}
 		// }
 	},
-	css: {
-		loaderOptions: {
-			sass: {}
-		}
-	},
 	// 默认设置: https://github.com/vuejs/vue-cli/tree/dev/packages/@vue/cli-service/lib/config/base.js
 	chainWebpack: config => {
 		/**
@@ -50,7 +45,7 @@ module.exports = {
 		const imagesRule = config.module.rule('images')
 		imagesRule
 			.test(/\.(png|jpe?g|gif|webp|svg)(\?.*)?$/)
-			.exclude.add(resolve('src/assets/Svg'))
+			.exclude.add(resolve('src/assets/svg-icon'))
 			.end()
 		// 重新设置 alias
 		config.resolve.alias.set('@', resolve('src')).set('@api', resolve('src/api')).set('@libs', resolve('src/libs'))

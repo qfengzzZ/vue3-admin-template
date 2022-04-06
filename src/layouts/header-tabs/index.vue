@@ -1,8 +1,8 @@
 <template>
-	<div>dashboard</div>
+	<div></div>
 </template>
 <script>
 export default {
-	name: 'DashboardIndex'
+	name: 'EHeaderTabs'
 }
 </script>

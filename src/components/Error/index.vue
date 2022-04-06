@@ -7,7 +7,7 @@
 			<h1>{{ type }}</h1>
 			<div class="el-exception-content-desc">{{ desc }}</div>
 			<div class="el-exception-content-actions">
-				<a href="#/dashboard" class="">返回首页</a>
+				<a href="/dashboard" class="">返回首页</a>
 			</div>
 		</div>
 	</div>

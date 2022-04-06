@@ -21,6 +21,11 @@
 		<e-menu-side-item v-for="item in side" :menu="item" :key="item.path"></e-menu-side-item>
 	</el-menu>
 </template>
+<script>
+export default {
+	name: 'EMenuSide'
+}
+</script>
 
 <script setup>
 import EMenuSideItem from './menu-item'

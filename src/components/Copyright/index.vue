@@ -3,6 +3,11 @@
 		<p class="e-global-footer-copyright">{{ copyright }}</p>
 	</div>
 </template>
+<script>
+export default {
+	name: 'ECopyright'
+}
+</script>
 <script setup>
 import { ref } from 'vue'
 const copyright = ref('欢迎使用vue-admin-template')

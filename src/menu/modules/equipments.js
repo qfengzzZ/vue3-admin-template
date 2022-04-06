@@ -7,7 +7,7 @@
 export default {
 	path: `/space`,
 	title: '空间管理',
-	icon: 'el-icon-s-data',
+	icon: 'edit-history',
 	children: [
 		{
 			path: `/space/list`,

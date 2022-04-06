@@ -3,5 +3,5 @@
 </template>
 
 <script setup>
-import ErrorPage from '@/components/Error'
+import ErrorPage from '@/components/error'
 </script>

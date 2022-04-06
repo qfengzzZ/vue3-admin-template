@@ -1,10 +1,7 @@
 <template>
 	<span class="e-layout-header-trigger e-layout-header-trigger-min">
 		<el-dropdown class="e-layout-header-user" @command="handleClick">
-			<span>
-				<el-avatar style="vertical-align: middle" size="small" icon="el-icon-user" />
-				<span class="e-layout-header-user-name">{{ userInfo.userName }}</span>
-			</span>
+			<el-avatar style="vertical-align: middle" size="small" icon="el-icon-user">admin</el-avatar>
 			<template #dropdown>
 				<el-dropdownMenu>
 					<el-dropdown-item command="logout">
@@ -16,12 +13,13 @@
 		</el-dropdown>
 	</span>
 </template>
+<script>
+export default {
+	name: 'EUser'
+}
+</script>
 <script setup>
-import { computed } from 'vue'
-import { useStore } from 'vuex'
-const store = useStore()
 const handleClick = () => {
 	console.log('logout')
 }
-const userInfo = computed(() => store.state.user.userInfo)
 </script>

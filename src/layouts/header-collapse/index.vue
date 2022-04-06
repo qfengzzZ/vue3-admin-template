@@ -1,9 +1,14 @@
 <template>
-	<span class="e-layout-header-trigger e-layout-header-trigger-fold" @click="handleToggleMenuSide">
+	<span class="e-layout-header-trigger e-layout-header-trigger-min" @click="handleToggleMenuSide">
 		<SvgIcon icon="menu-fold" v-show="!menuCollapse" />
 		<SvgIcon icon="menu-unfold" v-show="menuCollapse" />
 	</span>
 </template>
+<script>
+export default {
+	name: 'ECollapse'
+}
+</script>
 <script setup>
 import { computed } from 'vue'
 import { useStore } from 'vuex'

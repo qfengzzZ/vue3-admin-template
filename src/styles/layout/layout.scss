@@ -58,7 +58,6 @@
 		box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 		transition: all $transition-time $ease-in-out;
 		z-index: 3;
-		display: block;
 		&-fix {
 			position: fixed;
 			top: 0;
@@ -71,6 +70,7 @@
 		}
 		&-breadcrumb {
 			display: inline-block;
+			vertical-align: middle;
 			&-item {
 				span {
 					color: #999;
@@ -102,15 +102,12 @@
 					font-size: 18px;
 				}
 			}
-			// 只针对于折叠按钮
-			&-fold {
-				i {
-					color: #777;
-				}
-			}
 		}
 		&-right {
 			height: $menuHeaderHeight;
+			display: flex;
+			align-items: center;
+			padding-right: 12px;
 			float: right;
 		}
 		&-user {

@@ -6,6 +6,11 @@
 		</el-breadcrumb-item>
 	</el-breadcrumb>
 </template>
+<script>
+export default {
+	name: 'EBreadcrumb'
+}
+</script>
 <script setup>
 import { computed, watchEffect } from 'vue'
 import { useStore } from 'vuex'
