@@ -128,19 +128,25 @@
 				padding-left: $menuSideWidthCollapse;
 			}
 		}
+	}
+	&-content {
+		padding: 0;
 		&-tabs {
-			padding: 8px;
+			display: flex;
 			transition: all $transition-time $ease-in-out;
+			width: calc(100% - 256px);
+			padding: 8px;
 			&-fix {
 				position: fixed;
 				top: 64px;
 				z-index: 8
 			}
 			&-wrap {
-				display: flex;
 				position: relative;
-				width: 100%;
-				padding: 0 32px;
+				width: calc(100% - 32px);
+				&-fill {
+					padding: 0 32px;
+				}
 				.tabs-button {
 					width: 32px;
 					text-align: center;
@@ -158,6 +164,8 @@
 					}
 				}
 				.tabs-wrap-scroll {
+					display: flex;
+					white-space: nowrap;
 					overflow: hidden;
 					&-item {
 						background: #fff;
@@ -176,18 +184,28 @@
 						&__active {
 							color: #55a532;
 						}
+						.name {
+							margin-right: 8px;
+						}
 					}
 				}
 			}
+			.tabs-button__close {
+				min-width: 32px;
+				width: 32px;
+				height: 32px;
+				line-height: 32px;
+				text-align: center;
+				cursor: pointer;
+				.el-dropdown-name {
+					line-height: 32px;
+				}
+			}
 		}
-	}
-	&-content {
-		padding: 0;
 		&-fix-with-header {
-			padding-top: 96px;
+			padding-top: 112px;
 		}
 		&-main {
-			margin: 10px !important;
 			position: relative;
 		}
 	}

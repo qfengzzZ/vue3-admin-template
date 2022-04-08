@@ -2,7 +2,7 @@
 	<span class="e-layout-header-trigger e-layout-header-trigger-min">
 		<el-dropdown class="e-layout-header-user" @command="handleClick">
 			<el-avatar class="el-vl-align" size="small" icon="el-icon-user" />
-      <span class="el-ml-8">wěnZhang</span>
+			<span class="el-ml-8">wěnZhang</span>
 			<template #dropdown>
 				<el-dropdownMenu>
 					<el-dropdown-item command="logout">

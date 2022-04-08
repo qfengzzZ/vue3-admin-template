@@ -12,8 +12,8 @@
 					<e-header-user />
 				</div>
 			</el-header>
-			<e-header-tabs />
 			<el-main class="e-layout-content e-layout-content-fix-with-header">
+				<e-header-tabs />
 				<div class="e-layout-content-main">
 					<router-view v-slot="{ Component, route }">
 						<transition name="fade-top">
