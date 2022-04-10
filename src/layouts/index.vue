@@ -19,9 +19,9 @@
 					<router-view v-slot="{ Component, route }">
 						<transition name="fade-top">
 							<keep-alive v-if="keepAlive" :include="keepAlive">
-								<component :is="Component" :key="route.path"></component>
+								<component :is="Component" :key="route.fullPath"></component>
 							</keep-alive>
-							<component v-else :is="Component" :key="route.path"></component>
+							<component v-else :is="Component" :key="route.fullPath"></component>
 						</transition>
 					</router-view>
 				</div>
