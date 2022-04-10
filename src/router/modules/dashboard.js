@@ -14,7 +14,8 @@ export default {
 	},
 	meta: {
 		...meta,
-		title: 'dashboard'
+		title: '主控台',
+		affix: true
 	},
 	component: BasicLayout,
 	children: [

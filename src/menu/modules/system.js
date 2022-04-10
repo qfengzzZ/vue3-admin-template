@@ -7,7 +7,7 @@
 export default {
 	path: `/system`,
 	title: '系统管理',
-	icon: 'tools',
+	icon: 'settings',
 	children: [
 		{
 			path: `/system/userManage`,

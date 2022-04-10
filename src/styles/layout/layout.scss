@@ -23,7 +23,7 @@
 					height: 52px;
 					line-height: 52px;
 					transition: color 0.2s ease;
-					.icon {
+					.g-svg-icon {
 						margin: 0 5px;
 					}
 				}
@@ -34,7 +34,7 @@
 					&:hover {
 						color: #fff !important;
 					}
-					.icon {
+					.g-svg-icon {
 						margin: 0 5px;
 					}
 				}
@@ -71,15 +71,7 @@
 		&-breadcrumb {
 			display: inline-block;
 			vertical-align: middle;
-			&-item {
-				span {
-					color: #999;
-				}
-				a {
-					color: #555;
-					font-weight: 400 !important;
-				}
-			}
+			padding: 0 8px;
 		}
 		&-trigger {
 			display: inline-block;
@@ -92,14 +84,11 @@
 			&:hover {
 				background: $trigger-background;
 			}
-			i {
-				font-size: 20px;
-			}
 			&-min {
 				width: auto;
 				padding: $headerTriggerMinPadding;
-				i {
-					font-size: 18px;
+				.g-svg-icon {
+					vertical-align: middle;
 				}
 			}
 		}
@@ -169,23 +158,28 @@
 					overflow: hidden;
 					&-item {
 						background: #fff;
-						color: #2d8cf0;
-						line-height: 32px;
+						color: #111;
 						padding: 0 15px;
-						border-radius: 3px;
-						margin-right: 6px;
+						border-radius: 4px;
+						margin-right: 8px;
 						cursor: pointer;
-						display: inline-block;
-						position: relative;
-						flex: 0 0 auto;
-						&:hover {
-							color: #515a6e;
-						}
+						line-height: 32px;
+						height: 32px;
 						&__active {
-							color: #55a532;
+							.title {
+								color: #2d8cf0;
+							}
 						}
-						.name {
+						.title {
+							&:hover {
+								color: #2d8cf0;
+							}
 							margin-right: 8px;
+						}
+						.g-svg-icon {
+							&:hover {
+								color: #515a6e;
+							}
 						}
 					}
 				}
@@ -198,6 +192,7 @@
 				text-align: center;
 				cursor: pointer;
 				.el-dropdown-name {
+					font-size: 20px;
 					line-height: 32px;
 				}
 			}
@@ -206,6 +201,9 @@
 			padding-top: 112px;
 		}
 		&-main {
+			margin: 0 8px;
+			padding: 8px;
+			background: #fff;
 			position: relative;
 		}
 	}

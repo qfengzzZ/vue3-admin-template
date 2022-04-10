@@ -7,7 +7,7 @@
 export default {
 	path: `/space`,
 	title: '空间管理',
-	icon: 'edit-history',
+	icon: 'user',
 	children: [
 		{
 			path: `/space/list`,

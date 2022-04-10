@@ -5,26 +5,24 @@
 			'e-layout-content-tabs-fix': tabsFixed
 		}"
 	>
-		<div class="e-layout-content-tabs-wrap" :class="{ 'e-layout-content-tabs-wrap-fill': scrollable }">
+		<div ref="scrollableRef" class="e-layout-content-tabs-wrap" :class="{ 'e-layout-content-tabs-wrap-fill': scrollable }">
 			<span class="tabs-button tabs-button__prev" :class="{ 'tabs-button-hidden': !scrollable }">a</span>
 			<span class="tabs-button tabs-button__next" :class="{ 'tabs-button-hidden': !scrollable }">b</span>
 			<Draggable :list="tabsList" animation="300" item-key="path" class="tabs-wrap-scroll">
 				<template #item="{ element }">
-					<div class="tabs-wrap-scroll-item" :class="{ 'tabs-wrap-scroll-item__active': currentPath === element.path }" @click.stop="goPage(element)" @contextmenu="handleContextMenu($event, element)">
-						<span class="name">{{ element.name }}</span>
-            <SvgIcon icon="delete-filling" @click.stop="handleCloseTabItem(element)" />
+					<div class="tabs-wrap-scroll-item" :class="{ 'tabs-wrap-scroll-item__active': activePath === element.path }" @click="handleClickItem(element)">
+						<span class="title">{{ element.meta.title }}</span>
+						<SvgIcon icon="close" @click.stop="handleCloseItem(element)" v-if="!element.meta.affix" />
 					</div>
 				</template>
 			</Draggable>
 		</div>
 		<div class="tabs-button__close">
-			<el-dropdown>
-        <span class="el-dropdown-name"><SvgIcon icon="add-fill" /></span>
+			<el-dropdown @command="handleClickCommand">
+				<span class="el-dropdown-name"><SvgIcon icon="arrow-down" /></span>
 				<template #dropdown>
 					<el-dropdown-menu>
-						<el-dropdown-item>Action 1</el-dropdown-item>
-						<el-dropdown-item>Action 2</el-dropdown-item>
-						<el-dropdown-item>Action 3</el-dropdown-item>
+						<el-dropdown-item v-for="item in actionList" :command="item.command" :key="item.command" :disabled="item.isDisabled" :icon="item.icon">{{ item.label }}</el-dropdown-item>
 					</el-dropdown-menu>
 				</template>
 			</el-dropdown>
@@ -38,63 +36,109 @@ export default {
 </script>
 <script setup>
 import Draggable from 'vuedraggable'
-import { computed } from 'vue'
-const tabsFixed = true
-const scrollable = false
-const tabsList = [
-	{
-		name: 'dashboard',
-		id: 1,
-		path: '/a'
+import { computed, ref, nextTick, onMounted, watch, unref } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter, useRoute } from 'vue-router'
+const store = useStore()
+const router = useRouter()
+const route = useRoute()
+
+onMounted(() => {
+	updataScrollable()
+})
+
+watch(
+	() => route.path,
+	to => {
+		store.commit('menu/addTabsList', to)
 	},
 	{
-		name: 'system',
-		id: 2,
-		path: '/b'
-	},
-	{
-		name: 'dashboard',
-		id: 1,
-		path: '/a'
-	},
-	{
-		name: 'system',
-		id: 2,
-		path: '/b'
-	},
-	{
-		name: 'dashboard',
-		id: 1,
-		path: '/a'
-	},
-	{
-		name: 'dashboard',
-		id: 1,
-		path: '/a'
-	},
-	{
-		name: 'system',
-		id: 2,
-		path: '/b'
-	},
-	{
-		name: 'dashboard',
-		id: 1,
-		path: '/a'
-	},
-	{
-		name: 'dashboard',
-		id: 1,
-		path: '/a'
+		immediate: true
 	}
-]
-const currentPath = '/a'
-const goPage = item => {
-	console.log(item)
+)
+
+const tabsFixed = computed(() => store.state.layout.tabsFix)
+
+const scrollableRef = ref(null)
+const scrollable = ref(null)
+const updataScrollable = () => {
+	nextTick(() => {
+		if (!scrollableRef.value) return
+		let scrollWidth = scrollableRef.value.scrollWidth
+		let offsetWidth = scrollableRef.value.offsetWidth
+		if (scrollWidth > offsetWidth) {
+			scrollable.value = true
+		} else {
+			scrollable.value = false
+		}
+	})
 }
-const handleContextMenu = () => {}
 
-const handleCloseTabItem = element => {
+const tabsList = computed(() => store.state.menu.tabsList)
+const activePath = computed(() => store.state.menu.activePath)
 
+const handleClickItem = item => {
+	router.push({
+		path: item.path
+	})
+}
+
+const handleCloseItem = element => {
+	if (activePath.value === element.path) {
+		const $index = tabsList.value.findIndex(item => item.path === element.path)
+		store.commit('menu/removeTabsItem', element)
+		router.push({
+			path: tabsList.value[$index - 1].path
+		})
+	}
+	store.commit('menu/removeTabsItem', element)
+}
+
+const actionList = computed(() => {
+	const isDisabled = unref(tabsList).length <= 1
+	return [
+		{
+			label: '刷新当前',
+			command: 1,
+			isDisabled: false,
+			icon: <SvgIcon icon="refresh" />
+		},
+		{
+			label: `关闭当前`,
+			command: 2,
+			isDisabled: isDisabled,
+			icon: <SvgIcon icon="close" />
+		},
+		{
+			label: '关闭其他',
+			command: 3,
+			isDisabled: isDisabled,
+			icon: <SvgIcon icon="delete-column" />
+		},
+		{
+			label: '关闭全部',
+			command: 4,
+			isDisabled: isDisabled,
+			icon: <SvgIcon icon="subtract" />
+		}
+	]
+})
+const handleClickCommand = val => {
+	switch (val) {
+		case 1:
+			handleReload()
+			break
+		case 2:
+			handleCloseItem(route)
+			break
+		case 3:
+			break
+		case 4:
+			break
+	}
+}
+
+const handleReload = () => {
+	router.go(0)
 }
 </script>

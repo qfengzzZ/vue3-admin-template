@@ -1,6 +1,6 @@
 <template>
 	<span class="e-layout-header-trigger e-layout-header-trigger-min" @click="handleRefresh">
-		<SvgIcon icon="search" />
+		<SvgIcon icon="refresh" />
 	</span>
 </template>
 <script>
@@ -9,7 +9,9 @@ export default {
 }
 </script>
 <script setup>
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const handleRefresh = () => {
-	console.log('refresh')
+	router.go(0)
 }
 </script>

@@ -1,8 +1,7 @@
 <template>
 	<el-breadcrumb class="e-layout-header-breadcrumb" ref="breadcrumb">
 		<el-breadcrumb-item v-for="(item, index) in breadCrumbList" :key="index" class="e-layout-header-breadcrumb-item">
-			<span class="current-span" v-if="index === breadCrumbList.length - 1">{{ item.meta.title }}</span>
-			<span v-else>{{ item.meta.title }}</span>
+			{{ item.meta.title }}
 		</el-breadcrumb-item>
 	</el-breadcrumb>
 </template>

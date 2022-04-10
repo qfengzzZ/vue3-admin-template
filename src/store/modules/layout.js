@@ -11,7 +11,8 @@ export default {
 		// 侧边菜单栏是否开启手风琴模式
 		menuAccordion: true,
 		// 侧边菜单栏是否默认折起
-		menuCollapse: false
+		menuCollapse: false,
+		tabsFix: true
 	},
 	mutations: {
 		/**

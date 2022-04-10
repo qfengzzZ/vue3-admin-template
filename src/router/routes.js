@@ -6,7 +6,7 @@ import system from './modules/system'
  * 在主框架内显示
  */
 
-const frameIn = [
+export const frameIn = [
 	{
 		path: '/',
 		redirect: {

@@ -1,6 +1,6 @@
 import { createStore } from 'vuex'
 //  根据实际情况是否使用持久化存储
-// import createPersistedState from 'vuex-persistedstate'
+import createPersistedState from 'vuex-persistedstate'
 
 const files = require.context('./modules', false, /\.js$/)
 
@@ -11,6 +11,6 @@ files.keys().forEach(key => {
 })
 
 export default createStore({
-	modules
-	// plugins: [createPersistedState()]
+	modules,
+	plugins: [createPersistedState()]
 })

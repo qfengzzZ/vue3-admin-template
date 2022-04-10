@@ -15,9 +15,6 @@ body {
 img {
 	vertical-align: middle;
 }
-.el-vl-align {
-	vertical-align: middle;
-}
 // 隐藏滚动条
 .e-scrollbar-hide::-webkit-scrollbar {
 	width: 0;
@@ -52,9 +49,14 @@ img {
 .g-point {
 	cursor: pointer;
 }
+
+.g-vertical {
+	vertical-align: middle;
+}
+
 .g-action {
 	span {
-		margin: 0 5px;
+		margin: 0 8px;
 		position: relative;
 		&::after {
 			content: '';
@@ -67,7 +69,7 @@ img {
 		}
 	}
 	span:last-child {
-		&:after {
+		&::after {
 			border: none;
 		}
 	}
@@ -111,24 +113,10 @@ img {
 	text-align: right !important;
 }
 // icon
-.icon {
-	width: 1.1em;
-	height: 1.1em;
-	vertical-align: -0.15em;
+.g-svg-icon {
+	width: 1.2em;
+	height: 1.2em;
+	vertical-align: -0.24em;
 	fill: currentColor;
 	overflow: hidden;
-}
-// .el-button--primary:focus {
-// 	text-color: var(--el-color-white);
-// 	border-color: var(--el-color-primary);
-// 	background-color: var(--el-color-primary);
-// }
-// .el-button--default:focus {
-// 	background-color: var(--el-button-bg-color,var(--el-color-white));
-// 	border: var(--el-border-base);
-// 	border-color: var(--el-button-border-color,var(--el-border-color-base));
-// 	color: var(--el-button-text-color,var(--el-text-color-regular));
-// }
-.search-btn-right {
-	float: right;
 }

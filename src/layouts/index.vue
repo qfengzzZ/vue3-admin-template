@@ -9,6 +9,7 @@
 				<e-header-refresh />
 				<e-header-breadcrumb />
 				<div class="e-layout-header-right">
+					<e-header-fullscreen />
 					<e-header-user />
 				</div>
 			</el-header>
@@ -41,6 +42,7 @@ import EMenuSide from './menu-side'
 import EHeaderCollapse from './header-collapse'
 import EHeaderRefresh from './header-refresh'
 import EHeaderBreadcrumb from './header-breadcrumb'
+import EHeaderFullscreen from './header-fullscreen'
 import EHeaderUser from './header-user'
 import EHeaderTabs from './header-tabs'
 import ECopyright from '@/components/copyright'

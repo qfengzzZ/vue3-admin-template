@@ -4,17 +4,17 @@ const meta = {
 	auth: true
 }
 
-const pre = 'equipments-'
+const pre = 'table-'
 
 export default {
-	path: '/equipments',
-	name: 'equipments',
+	path: '/table',
+	name: 'table',
 	redirect: {
 		name: `${pre}index`
 	},
 	meta: {
 		...meta,
-		title: 'Dashboard'
+		title: '表格'
 	},
 	component: BasicLayout,
 	children: [
@@ -24,7 +24,7 @@ export default {
 			meta: {
 				...meta
 			},
-			component: () => import(/* dashboard */ '@/pages/dashboard')
+			component: () => import(/* dashboard */ '@/pages/table')
 		}
 	]
 }

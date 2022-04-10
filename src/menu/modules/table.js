@@ -5,7 +5,7 @@
 // }
 
 export default {
-	path: `/dashboard`,
-	title: '主控台',
-	icon: 'dashboard'
+	path: `/table`,
+	title: '表格',
+	icon: 'table'
 }

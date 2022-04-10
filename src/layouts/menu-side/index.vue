@@ -1,6 +1,6 @@
 <template>
 	<div class="e-layout-side-logo">
-		<a href="/dashboard">
+		<a href="/">
 			<img src="@/assets/images/logo-small.png" v-if="menuCollapse" />
 			<img src="@/assets/images/logo-dark.png" v-else-if="sideTheme === 'light'" />
 			<img src="@/assets/images/logo-dark.png" v-else />
@@ -15,7 +15,7 @@
 		:unique-opened="menuAccordion"
 		active-text-color="#fff"
 		:background-color="sideTheme === 'dark' ? '#191a23' : '#fff'"
-		:text-color="sideTheme === 'dark' ? 'hsla(0, 0%, 100%, .7)' : '#191a23'"
+		:text-color="sideTheme === 'dark' ? 'rgba(255, 255, 255, .7)' : '#191a23'"
 		:collapse-transition="false"
 	>
 		<e-menu-side-item v-for="item in side" :menu="item" :key="item.path"></e-menu-side-item>
