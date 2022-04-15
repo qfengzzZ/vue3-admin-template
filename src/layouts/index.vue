@@ -13,7 +13,7 @@
 					<e-header-user />
 				</div>
 			</el-header>
-			<el-main class="e-layout-content e-layout-content-fix-with-header">
+			<el-main class="e-layout-content e-layout-content-fix-with-header" :class="contentClasses">
 				<e-header-tabs />
 				<div class="e-layout-content-main">
 					<router-view v-slot="{ Component, route }">
@@ -58,6 +58,7 @@ const state = reactive({
 const keepAlive = computed(() => store.state.page.keepAlive)
 const menuCollapse = computed(() => store.state.layout.menuCollapse)
 const sideTheme = computed(() => store.state.layout.sideTheme)
+const tabsFix = computed(() => store.state.layout.tabsFix)
 
 const insideClasses = computed(() => {
 	return {
@@ -70,6 +71,12 @@ const headerClasses = computed(() => {
 	return {
 		'e-layout-header-fix': state.headerFix,
 		'e-layout-header-fix-collapse': state.headerFix && menuCollapse.value
+	}
+})
+
+const contentClasses = computed(() => {
+	return {
+		'e-layout-content-fix-with-tabs': tabsFix.value
 	}
 })
 

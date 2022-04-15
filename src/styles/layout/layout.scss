@@ -126,7 +126,7 @@
 			&-fix {
 				position: fixed;
 				top: 64px;
-				z-index: 8
+				z-index: 8;
 			}
 			&-wrap {
 				position: relative;
@@ -196,6 +196,9 @@
 			}
 		}
 		&-fix-with-header {
+			padding-top: 64px;
+		}
+		&-fix-with-tabs {
 			padding-top: 112px;
 		}
 		&-main {
