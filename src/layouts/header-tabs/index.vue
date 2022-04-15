@@ -6,8 +6,12 @@
 		}"
 	>
 		<div ref="scrollableRef" class="e-layout-content-tabs-wrap" :class="{ 'e-layout-content-tabs-wrap-fill': scrollable }">
-			<span class="tabs-button tabs-button__prev" :class="{ 'tabs-button-hidden': !scrollable }">a</span>
-			<span class="tabs-button tabs-button__next" :class="{ 'tabs-button-hidden': !scrollable }">b</span>
+			<span class="tabs-button tabs-button__prev" :class="{ 'tabs-button-hidden': !scrollable }">
+				<SvgIcon icon="arrow-left" />
+			</span>
+			<span class="tabs-button tabs-button__next" :class="{ 'tabs-button-hidden': !scrollable }">
+				<SvgIcon icon="arrow-right" />
+			</span>
 			<Draggable :list="tabsList" animation="300" item-key="path" class="tabs-wrap-scroll">
 				<template #item="{ element }">
 					<div class="tabs-wrap-scroll-item" :class="{ 'tabs-wrap-scroll-item__active': activePath === element.path }" @click="handleClickItem(element)">
@@ -36,31 +40,23 @@ export default {
 </script>
 <script setup>
 import Draggable from 'vuedraggable'
-import { computed, ref, nextTick, onMounted, watch, unref } from 'vue'
+import { computed, ref, nextTick, onMounted, unref, watchEffect } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter, useRoute } from 'vue-router'
 const store = useStore()
 const router = useRouter()
 const route = useRoute()
 
-onMounted(() => {
-	updataScrollable()
-})
+// onMounted(() => {
+// 	updataScrollable()
+// })
 
-watch(
-	() => route.path,
-	to => {
-		store.commit('menu/addTabsList', to)
-	},
-	{
-		immediate: true
-	}
-)
+// watchEffect(() => store.commit('page/addTabsList', route.path))
 
 const tabsFixed = computed(() => store.state.layout.tabsFix)
 
 const scrollableRef = ref(null)
-const scrollable = ref(null)
+const scrollable = ref(false)
 const updataScrollable = () => {
 	nextTick(() => {
 		if (!scrollableRef.value) return
@@ -74,7 +70,7 @@ const updataScrollable = () => {
 	})
 }
 
-const tabsList = computed(() => store.state.menu.tabsList)
+const tabsList = computed(() => store.state.page.tabsList)
 const activePath = computed(() => store.state.menu.activePath)
 
 const handleClickItem = item => {
@@ -86,12 +82,12 @@ const handleClickItem = item => {
 const handleCloseItem = element => {
 	if (activePath.value === element.path) {
 		const $index = tabsList.value.findIndex(item => item.path === element.path)
-		store.commit('menu/removeTabsItem', element)
+		store.commit('page/removeTabsItem', element)
 		router.push({
 			path: tabsList.value[$index - 1].path
 		})
 	}
-	store.commit('menu/removeTabsItem', element)
+	store.commit('page/removeTabsItem', element)
 }
 
 const actionList = computed(() => {

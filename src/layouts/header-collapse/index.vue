@@ -1,7 +1,7 @@
 <template>
 	<span class="e-layout-header-trigger e-layout-header-trigger-min" @click="handleToggleMenuSide">
-		<SvgIcon icon="menu-fold" v-show="!menuCollapse" />
-		<SvgIcon icon="menu-unfold" v-show="menuCollapse" />
+		<SvgIcon icon="menu-unfold" v-if="menuCollapse" />
+		<SvgIcon icon="menu-fold" v-else />
 	</span>
 </template>
 <script>

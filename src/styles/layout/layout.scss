@@ -96,7 +96,6 @@
 			height: $menuHeaderHeight;
 			display: flex;
 			align-items: center;
-			padding-right: 12px;
 			float: right;
 		}
 		&-user {
@@ -123,7 +122,6 @@
 		&-tabs {
 			display: flex;
 			transition: all $transition-time $ease-in-out;
-			width: calc(100% - 256px);
 			padding: 8px;
 			&-fix {
 				position: fixed;

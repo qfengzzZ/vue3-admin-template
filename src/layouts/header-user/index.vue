@@ -6,8 +6,7 @@
 			<template #dropdown>
 				<el-dropdownMenu>
 					<el-dropdown-item command="logout">
-						<SvgIcon icon="logout" />
-						<span>{{ '退出登录' }}</span>
+						<SvgIcon icon="logout" /><span>{{ '退出登录' }}</span>
 					</el-dropdown-item>
 				</el-dropdownMenu>
 			</template>
