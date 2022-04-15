@@ -11,6 +11,6 @@ files.keys().forEach(key => {
 })
 
 export default createStore({
-	modules,
+	modules
 	// plugins: [createPersistedState()]
 })

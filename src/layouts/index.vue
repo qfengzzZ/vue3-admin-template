@@ -82,7 +82,7 @@ const contentClasses = computed(() => {
 
 const headerStyle = computed(() => {
 	const menuWidth = menuCollapse.value ? 64 : 256
-	return state.headerFix? { width: `calc(100% - ${menuWidth}px)` } : {}
+	return state.headerFix ? { width: `calc(100% - ${menuWidth}px)` } : {}
 })
 </script>
 <style lang="scss" scoped>

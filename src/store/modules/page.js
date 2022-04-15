@@ -1,9 +1,4 @@
 import { frameIn } from '@/router/routes'
-const meta = {
-	auth: true
-}
-
-const pre = 'dashboard-'
 export default {
 	namespaced: true,
 	state: {
@@ -24,6 +19,7 @@ export default {
 			}
 		},
 		removeTabsItem(state, route) {
+			debugger
 			const $index = state.tabsList.findIndex(item => item.path === route.path)
 			if ($index > -1) {
 				state.tabsList.splice($index, 1)
