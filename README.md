@@ -1,5 +1,5 @@
 # vue-admin-template
-
+使用vue3搭建的一套企业后台管理模板
 ## Project setup
 ```
 yarn install

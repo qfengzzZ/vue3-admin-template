@@ -1,6 +1,7 @@
 {
   "name": "vue-admin-template",
   "version": "0.1.0",
+  "author": "zhangwen,zhangwen_doit@163.com",
   "private": true,
   "scripts": {
     "dev": "vue-cli-service serve",
