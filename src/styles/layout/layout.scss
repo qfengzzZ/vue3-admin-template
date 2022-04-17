@@ -75,6 +75,23 @@
 				left: $menuSideWidthCollapse;
 			}
 		}
+		&-stick {
+			left: 0;
+			z-index: 14;
+		}
+		&-logo {
+			display: inline-block;
+			height: $menuHeaderHeight;
+			line-height: $menuHeaderHeight;
+			&-stick {
+				width: $menuSideWidth;
+				text-align: center;
+			}
+			img{
+				height: 80%;
+				vertical-align: middle;
+			}
+		}
 		&-breadcrumb {
 			display: inline-block;
 			vertical-align: middle;
@@ -122,6 +139,9 @@
 			&-collapse {
 				padding-left: $menuSideWidthCollapse;
 			}
+		}
+		&-with-hide-side {
+			padding-left: 0;
 		}
 	}
 	&-content {

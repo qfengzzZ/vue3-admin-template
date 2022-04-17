@@ -1,16 +1,17 @@
 <template>
 	<el-container class="e-layout">
-		<el-aside class="e-layout-side e-layout-side-fix" :class="{ 'e-layout-side-fix-dark': sideTheme === 'dark' }" :width="menuCollapse ? '64px' : '256px'">
+		<el-aside v-if="!hideSide" class="e-layout-side e-layout-side-fix" :class="{ 'e-layout-side-fix-dark': sideTheme === 'dark' }" :width="menuCollapse ? '64px' : '256px'">
 			<e-menu-side></e-menu-side>
 		</el-aside>
 		<el-container class="e-layout-inside" :class="insideClasses">
 			<el-header class="e-layout-header" :class="headerClasses" :style="headerStyle" height="64px">
-				<e-header-collapse />
-				<e-header-refresh />
-				<e-header-breadcrumb v-if="!headerMenu" />
+				<e-header-logo v-if="isHeaderStick && headerFix" />
+				<e-header-collapse v-if="showSideCollapse && !hideSide" />
+				<e-header-refresh v-if="showReload && !hideSide" />
+				<e-header-breadcrumb v-if="showBreadcrumb && !headerMenu" />
 				<e-menu-head v-if="headerMenu" />
 				<div class="e-layout-header-right">
-					<e-header-fullscreen />
+					<e-header-fullscreen v-if="showFullscreen" />
 					<e-header-user />
 				</div>
 			</el-header>
@@ -40,6 +41,7 @@ export default {
 </script>
 <script setup>
 import EMenuSide from './menu-side'
+import EHeaderLogo from './header-logo'
 import EMenuHead from './menu-head'
 import EHeaderCollapse from './header-collapse'
 import EHeaderRefresh from './header-refresh'
@@ -54,27 +56,40 @@ import { useStore } from 'vuex'
 const store = useStore()
 
 const state = reactive({
-	headerFix: true,
 	sideFix: true
 })
 
 const headerMenu = computed(() => store.state.layout.headerMenu)
 const keepAlive = computed(() => store.state.page.keepAlive)
+// 折叠按钮
+const showSideCollapse = computed(() => store.state.layout.showSideCollapse)
 const menuCollapse = computed(() => store.state.layout.menuCollapse)
+
+const showReload = computed(() => store.state.layout.showReload)
+
+const showBreadcrumb = computed(() => store.state.layout.showBreadcrumb)
+
+const showFullscreen = computed(() => store.state.layout.showFullscreen)
+
 const sideTheme = computed(() => store.state.layout.sideTheme)
 const tabsFix = computed(() => store.state.layout.tabsFix)
+const hideSide = computed(() => store.state.layout.hideSide)
 
 const insideClasses = computed(() => {
 	return {
 		'e-layout-inside-fix-with-side': state.sideFix,
-		'e-layout-inside-fix-with-side-collapse': state.sideFix && menuCollapse.value
+		'e-layout-inside-fix-with-side-collapse': state.sideFix && menuCollapse.value,
+		'e-layout-inside-with-hide-side': isHeaderStick.value
 	}
 })
 
+const headerFix = computed(() => store.state.layout.headerFix)
+
 const headerClasses = computed(() => {
 	return {
-		'e-layout-header-fix': state.headerFix,
-		'e-layout-header-fix-collapse': state.headerFix && menuCollapse.value
+		'e-layout-header-fix': headerFix.value,
+		'e-layout-header-fix-collapse': headerFix.value && menuCollapse.value,
+		'e-layout-header-stick': isHeaderStick.value
 	}
 })
 
@@ -85,8 +100,17 @@ const contentClasses = computed(() => {
 })
 
 const headerStyle = computed(() => {
-	const menuWidth = menuCollapse.value ? 64 : 256
-	return state.headerFix ? { width: `calc(100% - ${menuWidth}px)` } : {}
+	const menuWidth = isHeaderStick.value ? 0 : menuCollapse.value ? 64 : 256
+	return headerFix.value ? { width: `calc(100% - ${menuWidth}px)` } : {}
+})
+
+// 如果开启 headerMenu，且当前 header 的 hideSide 为 true，则将顶部按 headerStick 处理
+// 这时，即使没有开启 headerStick，仍然按开启处理
+const headerStick = computed(() => store.state.layout.headerStick)
+const isHeaderStick = computed(() => {
+	let state = headerStick.value
+	if (hideSide.value) state = true
+	return state
 })
 </script>
 <style lang="scss" scoped>

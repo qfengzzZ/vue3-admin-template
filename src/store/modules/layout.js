@@ -10,12 +10,24 @@ export default {
 		headerFix: true,
 		// 侧边菜单栏是否开启手风琴模式
 		menuAccordion: true,
+		// 是否展示侧边栏折叠按钮
+		showSideCollapse: true,
 		// 侧边菜单栏是否默认折起
 		menuCollapse: false,
 		// 固定tab栏
 		tabsFix: true,
 		// 显示顶部菜单栏
-		headerMenu: true
+		headerMenu: true,
+		// 是否显示侧边栏
+		hideSide: false,
+		// 是否置顶顶栏
+		headerStick: false,
+		// 是否展示刷新按钮
+		showReload: true,
+		// 是否展示面包屑
+		showBreadcrumb: true,
+		// 是否展示全屏按钮
+		showFullscreen: true
 	},
 	mutations: {
 		/**
