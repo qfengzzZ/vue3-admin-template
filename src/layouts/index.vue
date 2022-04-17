@@ -7,7 +7,8 @@
 			<el-header class="e-layout-header" :class="headerClasses" :style="headerStyle" height="64px">
 				<e-header-collapse />
 				<e-header-refresh />
-				<e-header-breadcrumb />
+				<e-header-breadcrumb v-if="!headerMenu" />
+				<e-menu-head v-if="headerMenu" />
 				<div class="e-layout-header-right">
 					<e-header-fullscreen />
 					<e-header-user />
@@ -39,6 +40,7 @@ export default {
 </script>
 <script setup>
 import EMenuSide from './menu-side'
+import EMenuHead from './menu-head'
 import EHeaderCollapse from './header-collapse'
 import EHeaderRefresh from './header-refresh'
 import EHeaderBreadcrumb from './header-breadcrumb'
@@ -55,6 +57,8 @@ const state = reactive({
 	headerFix: true,
 	sideFix: true
 })
+
+const headerMenu = computed(() => store.state.layout.headerMenu)
 const keepAlive = computed(() => store.state.page.keepAlive)
 const menuCollapse = computed(() => store.state.layout.menuCollapse)
 const sideTheme = computed(() => store.state.layout.sideTheme)

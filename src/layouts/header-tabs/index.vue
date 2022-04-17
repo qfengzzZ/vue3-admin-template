@@ -9,7 +9,7 @@
 			</span>
 			<Draggable :list="tabsList" animation="300" item-key="path" class="tabs-wrap-scroll">
 				<template #item="{ element }">
-					<div class="tabs-wrap-scroll-item" :class="{ 'tabs-wrap-scroll-item__active': activePath === element.path }" @click="handleClickItem(element)">
+					<div class="tabs-wrap-scroll-item" :class="{ 'tabs-wrap-scroll-item__active': activePath === element.path }" @click.stop="handleClickItem(element)">
 						<span class="title">{{ element.meta.title }}</span>
 						<SvgIcon icon="close" @click.stop="handleCloseItem(element)" v-if="!element.meta.affix" />
 					</div>
@@ -35,7 +35,7 @@ export default {
 </script>
 <script setup>
 import Draggable from 'vuedraggable'
-import { computed, ref, nextTick, onMounted, unref, watchEffect } from 'vue'
+import { computed, ref, nextTick, onMounted, unref, watch } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter, useRoute } from 'vue-router'
 const store = useStore()
@@ -46,7 +46,13 @@ onMounted(() => {
 	updataScrollable()
 })
 
-watchEffect(() => store.commit('page/addTabsList', route.path))
+watch(
+	() => route.path,
+	() => store.commit('page/addTabsList', route.path),
+	{
+		immediate: true
+	}
+)
 
 const tabsFix = computed(() => store.state.layout.tabsFix)
 const menuCollapse = computed(() => store.state.layout.menuCollapse)

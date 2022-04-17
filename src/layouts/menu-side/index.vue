@@ -7,7 +7,7 @@
 		</a>
 	</div>
 	<el-menu
-		ref="menu"
+		ref="menuSideRef"
 		router
 		class="e-layout-menu-side e-scrollbar-hide"
 		:collapse="menuCollapse"
@@ -18,7 +18,7 @@
 		:text-color="sideTheme === 'dark' ? 'rgba(255, 255, 255, .7)' : '#191a23'"
 		:collapse-transition="false"
 	>
-		<e-menu-side-item v-for="item in side" :menu="item" :key="item.path"></e-menu-side-item>
+		<e-menu-side-item v-for="item in sider" :menu="item" :key="item.path"></e-menu-side-item>
 	</el-menu>
 </template>
 <script>
@@ -32,7 +32,7 @@ import EMenuSideItem from './menu-item'
 import { computed, watchEffect } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
-import side from '@/menu/side'
+import sider from '@/menu/sider'
 const store = useStore()
 const route = useRoute()
 const menuCollapse = computed(() => store.state.layout.menuCollapse)

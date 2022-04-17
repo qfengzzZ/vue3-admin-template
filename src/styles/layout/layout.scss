@@ -1,4 +1,10 @@
 .e-layout {
+	&-menu-head {
+		flex: 1;
+		.g-svg-icon {
+			margin: 0 5px;
+		}
+	}
 	&-side {
 		min-height: 100vh;
 		background-color: #fff;
@@ -52,6 +58,7 @@
 		}
 	}
 	&-header {
+		display: flex;
 		width: 100%;
 		background: #fff;
 		padding: 0;
@@ -130,7 +137,7 @@
 			}
 			&-wrap {
 				position: relative;
-				width: calc(100% - 32px);
+				flex: 1;
 				&-fill {
 					padding: 0 32px;
 				}

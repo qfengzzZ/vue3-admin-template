@@ -12,7 +12,10 @@ export default {
 		menuAccordion: true,
 		// 侧边菜单栏是否默认折起
 		menuCollapse: false,
-		tabsFix: true
+		// 固定tab栏
+		tabsFix: true,
+		// 显示顶部菜单栏
+		headerMenu: true
 	},
 	mutations: {
 		/**
