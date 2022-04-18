@@ -1,6 +1,6 @@
 <template>
 	<el-container class="e-layout">
-		<el-aside v-if="!hideSide" class="e-layout-side e-layout-side-fix" :class="{ 'e-layout-side-fix-dark': sideTheme === 'dark' }" :width="menuCollapse ? '64px' : '256px'">
+		<el-aside v-if="!hideSide" class="e-layout-side" :class="sideClasses" :width="menuCollapse ? '64px' : '256px'">
 			<e-menu-side></e-menu-side>
 		</el-aside>
 		<el-container class="e-layout-inside" :class="insideClasses">
@@ -50,17 +50,22 @@ import EHeaderFullscreen from './header-fullscreen'
 import EHeaderUser from './header-user'
 import EHeaderTabs from './header-tabs'
 import ECopyright from '@/components/copyright'
-import { computed, reactive } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 const store = useStore()
 
-const state = reactive({
-	sideFix: true
-})
-
-const headerMenu = computed(() => store.state.layout.headerMenu)
 const keepAlive = computed(() => store.state.page.keepAlive)
+const sideFix = computed(() => store.state.layout.sideFix)
+
+const sideClasses = computed(() => {
+	return {
+		'e-layout-side-dark': sideTheme.value === 'dark',
+		'e-layout-side-collapse': menuCollapse.value,
+		'e-layout-side-fix': sideFix.value
+	}
+})
+const headerMenu = computed(() => store.state.layout.headerMenu)
 // 折叠按钮
 const showSideCollapse = computed(() => store.state.layout.showSideCollapse)
 const menuCollapse = computed(() => store.state.layout.menuCollapse)
@@ -77,8 +82,8 @@ const hideSide = computed(() => store.state.layout.hideSide)
 
 const insideClasses = computed(() => {
 	return {
-		'e-layout-inside-fix-with-side': state.sideFix,
-		'e-layout-inside-fix-with-side-collapse': state.sideFix && menuCollapse.value,
+		'e-layout-inside-fix-with-side': sideFix.value,
+		'e-layout-inside-fix-with-side-collapse': sideFix.value && menuCollapse.value,
 		'e-layout-inside-with-hide-side': isHeaderStick.value
 	}
 })

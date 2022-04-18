@@ -7,7 +7,7 @@
 </template>
 <script>
 export default {
-	name: 'EBreadcrumb'
+	name: 'EHeaderBreadcrumb'
 }
 </script>
 <script setup>
