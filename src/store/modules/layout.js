@@ -1,35 +1,11 @@
 /**
  *  布局配置
  * */
-
+import Setting from '@/setting'
 export default {
 	namespaced: true,
 	state: {
-		sideTheme: 'dark',
-		// 是否固定侧边栏
-		sideFix: true,
-		// 是否固定顶栏
-		headerFix: true,
-		// 侧边菜单栏是否开启手风琴模式
-		menuAccordion: true,
-		// 是否展示侧边栏折叠按钮
-		showSideCollapse: true,
-		// 侧边菜单栏是否默认折起
-		menuCollapse: false,
-		// 固定tab栏
-		tabsFix: true,
-		// 显示顶部菜单栏
-		headerMenu: true,
-		// 是否显示侧边栏
-		hideSide: false,
-		// 是否置顶顶栏
-		headerStick: false,
-		// 是否展示刷新按钮
-		showReload: true,
-		// 是否展示面包屑
-		showBreadcrumb: true,
-		// 是否展示全屏按钮
-		showFullscreen: true
+		...Setting.layout
 	},
 	mutations: {
 		/**
@@ -39,6 +15,15 @@ export default {
 		 * */
 		updateMenuCollapse(state, collapse) {
 			state.menuCollapse = collapse
+		},
+		/**
+		 * @description 更改指定布局配置
+		 * @param {Object} state vuex state
+		 * @param {Object} key layout 名称，对应 Setting.layout
+		 * @param {Object} value layout 值
+		 * */
+		updateLayoutSetting(state, { key, value }) {
+			state[key] = value
 		}
 	}
 }

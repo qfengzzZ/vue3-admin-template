@@ -13,10 +13,11 @@
 				<div class="e-layout-header-right">
 					<e-header-fullscreen v-if="showFullscreen" />
 					<e-header-user />
+					<e-header-setting />
 				</div>
 			</el-header>
-			<el-main class="e-layout-content e-layout-content-fix-with-header" :class="contentClasses">
-				<e-header-tabs />
+			<el-main class="e-layout-content" :class="contentClasses">
+				<e-header-tabs v-if="showTabs" :class="tabsClasses" :style="tabsStyle" />
 				<div class="e-layout-content-main">
 					<router-view v-slot="{ Component, route }">
 						<transition name="fade-top">
@@ -48,9 +49,10 @@ import EHeaderRefresh from './header-refresh'
 import EHeaderBreadcrumb from './header-breadcrumb'
 import EHeaderFullscreen from './header-fullscreen'
 import EHeaderUser from './header-user'
+import EHeaderSetting from './header-setting'
 import EHeaderTabs from './header-tabs'
 import ECopyright from '@/components/copyright'
-import { computed } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
 
 const store = useStore()
@@ -78,7 +80,16 @@ const showFullscreen = computed(() => store.state.layout.showFullscreen)
 
 const sideTheme = computed(() => store.state.layout.sideTheme)
 const tabsFix = computed(() => store.state.layout.tabsFix)
-const hideSide = computed(() => store.state.layout.hideSide)
+const hideSide = computed(() => store.getters['menu/isHideSide'])
+
+// 如果开启 headerMenu，且当前 header 的 hideSide 为 true，则将顶部按 headerStick 处理
+// 这时，即使没有开启 headerStick，仍然按开启处理
+const headerStick = computed(() => store.state.layout.headerStick)
+const isHeaderStick = computed(() => {
+	let state = headerStick.value
+	if (hideSide.value) state = true
+	return state
+})
 
 const insideClasses = computed(() => {
 	return {
@@ -89,33 +100,69 @@ const insideClasses = computed(() => {
 })
 
 const headerFix = computed(() => store.state.layout.headerFix)
-
+const headTheme = computed(() => store.state.layout.headTheme)
 const headerClasses = computed(() => {
-	return {
-		'e-layout-header-fix': headerFix.value,
-		'e-layout-header-fix-collapse': headerFix.value && menuCollapse.value,
-		'e-layout-header-stick': isHeaderStick.value
-	}
+	return [
+		`e-layout-header-color-${headTheme.value}`,
+		{
+			'e-layout-header-dark': headTheme.value === 'dark',
+			'e-layout-header-with-menu': headerMenu.value,
+			'e-layout-header-fix': headerFix.value,
+			'e-layout-header-fix-collapse': headerFix.value && menuCollapse.value,
+			'e-layout-header-stick': isHeaderStick.value
+		}
+	]
 })
 
 const contentClasses = computed(() => {
 	return {
-		'e-layout-content-fix-with-tabs': tabsFix.value
+		'e-layout-content-with-header-fix': headerFix.value,
+		'e-layout-content-with-tabs': !headerFix.value && tabsFix.value,
+		'e-layout-content-with-tabs-fix': headerFix.value && tabsFix.value
 	}
+})
+const showTabs = computed(() => store.state.layout.showTabs)
+const tabsClasses = computed(() => {
+	return {
+		'e-layout-content-tabs-fix': tabsFix.value
+	}
+})
+
+const tabsStyle = computed(() => {
+	let style = {}
+	if (tabsFix.value && !headerFix.value) {
+		style.top = `${64 - currentScrollTop.value}px`
+	}
+	const menuWidth = isHeaderStick.value ? 0 : menuCollapse.value ? 64 : 256
+	if (tabsFix.value) {
+		style.width = `calc(100% - ${menuWidth}px)`
+		style.left = `${menuWidth}px`
+	}
+	return style
+})
+
+// 滚动相关参数
+const currentScrollTop = ref(0)
+const handleScroll = () => {
+	if (tabsFix.value && !headerFix.value) {
+		const scrollTop = document.body.scrollTop + document.documentElement.scrollTop
+		currentScrollTop.value = scrollTop > 64 ? 64 : scrollTop
+	}
+}
+// 监听屏幕滚动事件
+onMounted(() => {
+	window.addEventListener('scroll', handleScroll, { passive: true })
+	handleScroll()
+})
+
+// 卸载销毁滚动事件
+onBeforeUnmount(() => {
+	window.removeEventListener('scroll', handleScroll)
 })
 
 const headerStyle = computed(() => {
 	const menuWidth = isHeaderStick.value ? 0 : menuCollapse.value ? 64 : 256
 	return headerFix.value ? { width: `calc(100% - ${menuWidth}px)` } : {}
-})
-
-// 如果开启 headerMenu，且当前 header 的 hideSide 为 true，则将顶部按 headerStick 处理
-// 这时，即使没有开启 headerStick，仍然按开启处理
-const headerStick = computed(() => store.state.layout.headerStick)
-const isHeaderStick = computed(() => {
-	let state = headerStick.value
-	if (hideSide.value) state = true
-	return state
 })
 </script>
 <style lang="scss" scoped>

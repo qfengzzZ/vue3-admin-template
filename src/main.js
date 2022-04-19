@@ -11,6 +11,10 @@ import SvgIcon from '@/components/svg-icon'
 import '@/assets/iconfonts/iconfont'
 import '@/styles/index.scss'
 
+import directive from '@/directive'
+
 const app = createApp(App)
+
+app.directive('auth', directive)
 
 app.use(store).use(router).use(ElementPlus, { locale: zhCn }).component('SvgIcon', SvgIcon).mount('#app')

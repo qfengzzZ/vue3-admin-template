@@ -13,12 +13,12 @@
 		:collapse="menuCollapse"
 		:default-active="activePath"
 		:unique-opened="menuAccordion"
-		active-text-color="#fff"
-		:background-color="sideTheme === 'dark' ? '#191a23' : '#fff'"
-		:text-color="sideTheme === 'dark' ? 'rgba(255, 255, 255, .7)' : '#191a23'"
+		:active-text-color="sideTheme === 'dark' ? '#fff' : ''"
+		:background-color="sideTheme === 'dark' ? '#191a23' : ''"
+		:text-color="sideTheme === 'dark' ? 'rgba(255, 255, 255, .7)' : ''"
 		:collapse-transition="false"
 	>
-		<e-menu-side-item v-for="item in sider" :menu="item" :key="item.path"></e-menu-side-item>
+		<e-menu-side-item v-for="item in filterSide" :menu="item" :index="item.path" :key="item.path"></e-menu-side-item>
 	</el-menu>
 </template>
 <script>
@@ -29,17 +29,11 @@ export default {
 
 <script setup>
 import EMenuSideItem from './menu-item'
-import { computed, watchEffect } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
-import { useRoute } from 'vue-router'
-import sider from '@/menu/sider'
 const store = useStore()
-const route = useRoute()
 const menuCollapse = computed(() => store.state.layout.menuCollapse)
-// const filterSide = computed(() => store.getters['menu/filterSide'])
-watchEffect(() => {
-	store.commit('menu/setActivePath', route.path)
-})
+const filterSide = computed(() => store.getters['menu/filterSide'])
 
 const activePath = computed(() => store.state.menu.activePath)
 const sideTheme = computed(() => store.state.layout.sideTheme)

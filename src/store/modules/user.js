@@ -5,7 +5,7 @@ export default {
 	namespaced: true,
 	state: {
 		// 用户信息
-		userInfo: {}
+		info: {}
 	},
 	mutations: {
 		setUserInfo(state, userInfo) {

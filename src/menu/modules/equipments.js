@@ -8,6 +8,7 @@ export default {
 	path: `/space`,
 	title: '空间管理',
 	icon: 'user',
+	header: 'header',
 	children: [
 		{
 			path: `/space/list`,

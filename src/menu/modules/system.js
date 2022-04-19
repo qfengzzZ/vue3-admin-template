@@ -7,6 +7,7 @@
 export default {
 	path: `/system`,
 	title: '系统管理',
+	header: 'log',
 	icon: 'settings',
 	children: [
 		{

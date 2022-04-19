@@ -1,5 +1,5 @@
 <template>
-	<div class="e-layout-content-tabs" :class="tabsClasses" :style="tabsStyle">
+	<div class="e-layout-content-tabs">
 		<div ref="scrollableRef" class="e-layout-content-tabs-wrap" :class="{ 'e-layout-content-tabs-wrap-fill': scrollable }">
 			<span class="tabs-button tabs-button__prev" :class="{ 'tabs-button-hidden': !scrollable }">
 				<SvgIcon icon="arrow-left" />
@@ -43,7 +43,7 @@ const router = useRouter()
 const route = useRoute()
 
 onMounted(() => {
-	updataScrollable()
+	updateScrollable()
 })
 
 watch(
@@ -54,12 +54,9 @@ watch(
 	}
 )
 
-const tabsFix = computed(() => store.state.layout.tabsFix)
-const menuCollapse = computed(() => store.state.layout.menuCollapse)
-
 const scrollableRef = ref(null)
 const scrollable = ref(false)
-const updataScrollable = () => {
+const updateScrollable = () => {
 	nextTick(() => {
 		if (!scrollableRef.value) return
 		let scrollWidth = scrollableRef.value.scrollWidth
@@ -74,17 +71,6 @@ const updataScrollable = () => {
 
 const tabsList = computed(() => store.state.page.tabsList)
 const activePath = computed(() => store.state.menu.activePath)
-
-const tabsClasses = computed(() => {
-	return {
-		'e-layout-content-tabs-fix': tabsFix.value
-	}
-})
-
-const tabsStyle = computed(() => {
-	const tabsWidth = menuCollapse.value ? 64 : 256
-	return tabsFix.value ? { width: `calc(100% - ${tabsWidth}px)` } : {}
-})
 
 const handleClickItem = item => {
 	router.push({
