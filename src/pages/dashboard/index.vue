@@ -1,5 +1,7 @@
 <template>
-	<div>dashboard</div>
+	<div>
+		<el-button type="primary">button</el-button>
+	</div>
 </template>
 <script>
 export default {

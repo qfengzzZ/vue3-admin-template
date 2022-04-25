@@ -13,7 +13,7 @@
 				<div class="e-layout-header-right">
 					<e-header-fullscreen v-if="showFullscreen" />
 					<e-header-user />
-					<e-header-setting />
+					<e-header-setting v-if="enableSetting" />
 				</div>
 			</el-header>
 			<el-main class="e-layout-content" :class="contentClasses">
@@ -61,11 +61,13 @@ const keepAlive = computed(() => store.state.page.keepAlive)
 const sideFix = computed(() => store.state.layout.sideFix)
 
 const sideClasses = computed(() => {
-	return {
-		'e-layout-side-dark': sideTheme.value === 'dark',
-		'e-layout-side-collapse': menuCollapse.value,
-		'e-layout-side-fix': sideFix.value
-	}
+	return [
+		`e-layout-side-theme-${sideTheme.value}`,
+		{
+			'e-layout-side-collapse': menuCollapse.value,
+			'e-layout-side-fix': sideFix.value
+		}
+	]
 })
 const headerMenu = computed(() => store.state.layout.headerMenu)
 // 折叠按钮
@@ -77,6 +79,7 @@ const showReload = computed(() => store.state.layout.showReload)
 const showBreadcrumb = computed(() => store.state.layout.showBreadcrumb)
 
 const showFullscreen = computed(() => store.state.layout.showFullscreen)
+const enableSetting = computed(() => store.state.layout.enableSetting)
 
 const sideTheme = computed(() => store.state.layout.sideTheme)
 const tabsFix = computed(() => store.state.layout.tabsFix)
@@ -103,7 +106,7 @@ const headerFix = computed(() => store.state.layout.headerFix)
 const headTheme = computed(() => store.state.layout.headTheme)
 const headerClasses = computed(() => {
 	return [
-		`e-layout-header-color-${headTheme.value}`,
+		`e-layout-header-theme-${headTheme.value}`,
 		{
 			'e-layout-header-dark': headTheme.value === 'dark',
 			'e-layout-header-with-menu': headerMenu.value,

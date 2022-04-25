@@ -1,9 +1,5 @@
 import BasicLayout from '@/layouts'
 
-const meta = {
-	auth: true
-}
-
 const pre = 'system-'
 
 export default {
@@ -13,18 +9,19 @@ export default {
 		name: `${pre}index`
 	},
 	meta: {
-		...meta,
 		title: 'system'
 	},
 	component: BasicLayout,
 	children: [
 		{
-			path: '',
+			path: 'user',
 			name: `${pre}index`,
-			meta: {
-				...meta
-			},
-			component: () => import(/* dashboard */ '@/pages/dashboard')
+			component: () => import('@/pages/system/error/403')
+		},
+		{
+			path: 'role',
+			name: `${pre}role`,
+			component: () => import('@/pages/system/error/404')
 		}
 	]
 }

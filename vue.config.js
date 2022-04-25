@@ -3,7 +3,7 @@ const resolve = dir => require('path').join(__dirname, dir)
 
 // 增加环境变量
 process.env.VUE_APP_VERSION = require('./package.json').version
-process.env.VUE_APP_BUILD_TIME = require('dayjs')().format('YYYY-M-D HH:mm:ss')
+process.env.VUE_APP_BUILD_TIME = require('dayjs')().format('YYYY-MM-DD HH:mm:ss')
 
 module.exports = {
 	outputDir: 'dist',
@@ -11,7 +11,7 @@ module.exports = {
 	lintOnSave: true,
 	// assetsDir: '',
 	runtimeCompiler: true,
-	productionSourceMap: process.env.VUE_APP_ENV === 'testing', // 该配置项用于设置是否为生产环境构建生成 source map，一般在生产环境下为了快速定位错误信息,开发环境或者测试环境为true,线上为false
+	productionSourceMap: process.env.VUE_APP_ENV === 'development', // 该配置项用于设置是否为生产环境构建生成 source map，一般在生产环境下为了快速定位错误信息,开发环境或者测试环境为true,线上为false
 	devServer: {
 		// proxy: {
 		// 	'/api': {

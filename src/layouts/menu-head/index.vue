@@ -1,13 +1,5 @@
 <template>
-	<el-menu
-		class="e-layout-menu-head"
-		ref="menuHeadRef"
-		mode="horizontal"
-		:default-active="headerName"
-		:active-text-color="headTheme === 'dark' ? '#fff' : ''"
-		:background-color="headTheme === 'dark' ? '#191a23' : ''"
-		:text-color="headTheme === 'dark' ? 'rgba(255, 255, 255, .7)' : ''"
-	>
+	<el-menu class="e-layout-header-menu" ref="menuHeadRef" mode="horizontal" :default-active="headerName">
 		<e-menu-side-item v-for="item in filterHead" :menu="item" :index="item.name" :key="item.path" @click="handleItemClick(item)"></e-menu-side-item>
 	</el-menu>
 </template>
@@ -28,7 +20,6 @@ import Setting from '@/setting'
 const store = useStore()
 const filterHead = computed(() => store.getters['menu/filterHead'])
 const headerName = computed(() => store.state.menu.headerName)
-const headTheme = computed(() => store.state.layout.headTheme)
 
 const route = useRoute()
 

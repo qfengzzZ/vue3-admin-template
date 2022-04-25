@@ -100,17 +100,6 @@
 			</div>
 			<div class="e-layout-header-setting-item" :class="{ 'e-layout-header-setting-item-disabled': !showTabs }">
 				<span class="e-layout-header-setting-item-label">
-					多页签显示图标
-					<el-tooltip placement="top" content="需开启多页签">
-						<SvgIcon icon="information" />
-					</el-tooltip>
-				</span>
-				<span class="e-layout-header-setting-item-value">
-					<el-switch size="small" :value="showTabsIcon" :disabled="!showTabs" @change="val => handleChangeSetting('showTabsIcon', val)" />
-				</span>
-			</div>
-			<div class="e-layout-header-setting-item" :class="{ 'e-layout-header-setting-item-disabled': !showTabs }">
-				<span class="e-layout-header-setting-item-label">
 					固定多页签
 					<el-tooltip placement="top" content="需开启多页签">
 						<SvgIcon icon="information" />
@@ -152,7 +141,6 @@ const showBreadcrumb = computed(() => store.state.layout.showBreadcrumb)
 const showReload = computed(() => store.state.layout.showReload)
 
 const showTabs = computed(() => store.state.layout.showTabs)
-const showTabsIcon = computed(() => store.state.layout.showTabsIcon)
 const tabsFix = computed(() => store.state.layout.tabsFix)
 const handleChangeSetting = (key, value) => {
 	store.commit('layout/updateLayoutSetting', { key, value })

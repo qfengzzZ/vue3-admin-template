@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import routes from './routes'
+import cookies from '@/utils/cookies'
 
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
@@ -16,7 +17,7 @@ router.beforeEach((to, from, next) => {
 	// 判断是否需要登录才可以进入
 	if (to.matched.some(_ => _.meta.auth)) {
 		// 这里依据 token 判断是否登录，可视情况修改
-		const token = util.cookies.get('token')
+		const token = cookies.get('token')
 
 		if (token && token !== 'undefined') {
 			next()
@@ -34,7 +35,6 @@ router.beforeEach((to, from, next) => {
 		// 不需要身份校验 直接通过
 		next()
 	}
-	next()
 })
 
 router.afterEach(() => {

@@ -1,9 +1,5 @@
 import BasicLayout from '@/layouts'
 
-const meta = {
-	auth: true
-}
-
 const pre = 'dashboard-'
 
 export default {
@@ -13,7 +9,6 @@ export default {
 		name: `${pre}index`
 	},
 	meta: {
-		...meta,
 		title: '主控台',
 		affix: true
 	},
@@ -22,9 +17,6 @@ export default {
 		{
 			path: '',
 			name: `${pre}index`,
-			meta: {
-				...meta
-			},
 			component: () => import(/* dashboard */ '@/pages/dashboard')
 		}
 	]

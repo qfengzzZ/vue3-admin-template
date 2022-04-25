@@ -1,9 +1,5 @@
 import BasicLayout from '@/layouts'
 
-const meta = {
-	auth: true
-}
-
 const pre = 'table-'
 
 export default {
@@ -13,18 +9,19 @@ export default {
 		name: `${pre}index`
 	},
 	meta: {
-		...meta,
-		title: '表格'
+		title: 'table'
 	},
 	component: BasicLayout,
 	children: [
 		{
-			path: '',
+			path: '/user',
 			name: `${pre}index`,
-			meta: {
-				...meta
-			},
-			component: () => import(/* dashboard */ '@/pages/table')
+			component: () => import('@/pages/table')
+		},
+		{
+			path: '/role',
+			name: `${pre}role`,
+			component: () => import('@/pages/table/table-two')
 		}
 	]
 }

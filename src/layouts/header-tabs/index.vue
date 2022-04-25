@@ -48,7 +48,11 @@ onMounted(() => {
 
 watch(
 	() => route.path,
-	() => store.commit('page/addTabsList', route.path),
+	(to, from) => {
+		if (to !== from) {
+			store.commit('page/addTabsList', to)
+		}
+	},
 	{
 		immediate: true
 	}

@@ -1,19 +1,16 @@
 <template>
 	<el-menu-item :index="index" v-if="menu.children === undefined || !menu.children.length">
-		<!-- <i :class="menu.icon" v-if="menu.icon" />
-		<i :class="menu.custom" v-else-if="menu.custom" />
-		<img :src="menu.img" v-else-if="menu.img" /> -->
 		<SvgIcon :icon="menu.icon" v-if="menu.icon" />
 		<template #title>
 			<span>{{ menu.title }}</span>
 		</template>
 	</el-menu-item>
-	<el-sub-menu ref="subMenu" :index="index" v-else popper-append-to-body popper-class="menu-popper-custom">
+	<el-sub-menu :index="index" v-else :popper-class="subMenuClass">
 		<template #title>
 			<SvgIcon :icon="menu.icon" v-if="menu.icon" />
 			<span>{{ menu.title }}</span>
 		</template>
-		<e-menu-side-item v-for="item in menu.children" :index="index" :key="item.path" :menu="item" />
+		<e-menu-side-item v-for="item in menu.children" :index="item.path" :key="item.path" :menu="item" />
 	</el-sub-menu>
 </template>
 <script>
@@ -22,7 +19,9 @@ export default {
 }
 </script>
 <script setup>
-defineProps({
+import { computed, toRefs } from 'vue'
+
+const props = defineProps({
 	menu: {
 		type: Object,
 		default: () => {
@@ -30,8 +29,17 @@ defineProps({
 		}
 	},
 	index: {
+		type: String
+	},
+	sideTheme: {
 		type: String,
-		default: ''
+		default: 'light'
 	}
+})
+
+const { menu, index, sideTheme } = toRefs(props)
+
+const subMenuClass = computed(() => {
+	return `custom-submenu-popper-${sideTheme.value}`
 })
 </script>

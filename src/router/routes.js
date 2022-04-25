@@ -1,5 +1,5 @@
 import dashboard from './modules/dashboard'
-import equipments from './modules/equipments'
+import table from './modules/table'
 import system from './modules/system'
 
 /**
@@ -14,7 +14,7 @@ export const frameIn = [
 		}
 	},
 	dashboard,
-	equipments,
+	table,
 	system
 ]
 
