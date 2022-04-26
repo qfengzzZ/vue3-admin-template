@@ -38,14 +38,11 @@ module.exports = {
 				// sourcemap不包含列信息
 				config => config.devtool('cheap-source-map')
 			)
-		// markdown
-		config.module.rule('md').test(/\.md$/).use('text-loader').loader('text-loader').end()
-
 		// image exclude
 		const imagesRule = config.module.rule('images')
 		imagesRule
 			.test(/\.(png|jpe?g|gif|webp|svg)(\?.*)?$/)
-			.exclude.add(resolve('src/assets/svg-icon'))
+			.exclude.add(resolve('src/assets/svg'))
 			.end()
 		// 重新设置 alias
 		config.resolve.alias.set('@', resolve('src')).set('@api', resolve('src/api')).set('@libs', resolve('src/libs'))

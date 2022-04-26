@@ -6,9 +6,9 @@ export default {
 		tabsList: [
 			// 默认展示主页tab
 			{
-				fullPath: '/dashboard',
-				path: '/dashboard',
-				name: 'dashboard',
+				fullPath: '/dashboard/console',
+				path: '/dashboard/console',
+				name: 'dashboard-console',
 				meta: {
 					title: '主控台',
 					affix: true

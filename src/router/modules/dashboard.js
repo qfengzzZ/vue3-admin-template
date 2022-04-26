@@ -6,7 +6,7 @@ export default {
 	path: '/dashboard',
 	name: 'dashboard',
 	redirect: {
-		name: `${pre}index`
+		name: `${pre}console`
 	},
 	meta: {
 		title: '主控台',
@@ -15,9 +15,19 @@ export default {
 	component: BasicLayout,
 	children: [
 		{
-			path: '',
-			name: `${pre}index`,
-			component: () => import(/* dashboard */ '@/pages/dashboard')
+			path: 'console',
+			name: `${pre}console`,
+			component: () => import(/* dashboard */ '@/pages/dashboard/console')
+		},
+		{
+			path: 'monitor',
+			name: `${pre}monitor`,
+			component: () => import(/* dashboard */ '@/pages/dashboard/monitor')
+		},
+		{
+			path: 'workspace',
+			name: `${pre}workspace`,
+			component: () => import(/* dashboard */ '@/pages/dashboard/workspace')
 		}
 	]
 }
