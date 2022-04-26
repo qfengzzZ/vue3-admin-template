@@ -144,11 +144,12 @@ $trigger-background: #f8f8f9;
 					--el-menu-active-color: var(--el-color-primary);
 					--el-menu-text-color: rgba(0, 0, 0, .7);
 					--el-menu-hover-text-color: var(--el-color-primary);
-					--el-menu-active-bg-color: #f0faff;
+					--el-menu-active-bg-color: transparent;
+					--el-menu-hover-bg-color: transparent;
 					&-item {
 						&:hover {
 							color: var(--el-menu-active-color);
-							background-color: transparent;
+							background-color: var(--el-menu-hover-bg-color);
 						}
 						&.is-active {
 							color: var(--el-menu-active-color);
@@ -313,6 +314,7 @@ $trigger-background: #f8f8f9;
 			display: flex;
 			transition: all $transition-time $ease-in-out;
 			padding: 8px;
+			background-color: #f7f7f7;
 			&-fix {
 				position: fixed;
 				top: $menuHeaderHeight;
@@ -409,7 +411,7 @@ $trigger-background: #f8f8f9;
 		border: none !important;
 		box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
 		.el-menu {
-			--el-menu-active-color: #fff;
+			--el-menu-active-text-color: #fff;
 			--el-menu-text-color: rgba(255, 255, 255, .7);
 			--el-menu-bg-color: #191a23;
 			--el-menu-hover-text-color: #fff;
@@ -423,12 +425,12 @@ $trigger-background: #f8f8f9;
 				&__title {
 					&:hover {
 						background: transparent;
-						color: var(--el-menu-active-color);
+						color: var(--el-menu-active-text-color);
 					}
 				}
 				&.is-active {
 					background: var(--el-menu-submenu--active-color);
-					color: var(--el-menu-active-color);
+					color: var(--el-menu-active-text-color);
 				}
 				/*
 					解决element-plus无法动态添加popper-class
@@ -442,11 +444,11 @@ $trigger-background: #f8f8f9;
 							height: var(--el-menu-item-height);
 							line-height: var(--el-menu-item-height);
 							&:hover {
-								color: var(--el-menu-active-color);
+								color: var(--el-menu-active-text-color);
 								background: transparent;
 							}
 							&.is-active {
-								color: var(--el-menu-active-color);
+								color: var(--el-menu-active-text-color);
 								background: var(--el-color-primary);
 							}
 						}
@@ -455,11 +457,11 @@ $trigger-background: #f8f8f9;
 			}
 			&-item {
 				&:hover {
-					color: var(--el-menu-active-color);
+					color: var(--el-menu-active-text-color);
 					background: transparent;
 				}
 				&.is-active {
-					color: var(--el-menu-active-color);
+					color: var(--el-menu-active-text-color);
 					background: var(--el-menu-active-bg-color);
 				}
 			}

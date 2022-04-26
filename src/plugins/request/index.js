@@ -1,6 +1,7 @@
 import axios from 'axios'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElNotification } from 'element-plus'
 import { debounce } from 'lodash'
+import Setting from '@/setting'
 
 // 创建一个错误
 function errorCreate(msg) {
@@ -9,17 +10,25 @@ function errorCreate(msg) {
 	throw err
 }
 
-// 记录和显示错误
 const errorLog = debounce(err => {
-	ElMessage({
-		message: err.message,
-		type: 'error'
-	})
+	if (Setting.errorModalType === 'Message') {
+		ElMessage({
+			message: err.message,
+			type: 'error',
+			duration: Setting.modalDuration
+		})
+	} else if (Setting.errorModalType === 'Notification') {
+		ElNotification({
+			message: err.message,
+			type: 'error',
+			duration: Setting.modalDuration
+		})
+	}
 }, 500)
 
 // 创建一个 axios 实例
 const service = axios.create({
-	baseURL: '/',
+	baseURL: Setting.apiBaseURL,
 	timeout: 50000, // 请求超时时间
 	withCredentials: true
 })

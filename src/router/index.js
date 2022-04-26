@@ -1,6 +1,7 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 import routes from './routes'
 import cookies from '@/utils/cookies'
+import Setting from '@/setting'
 
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
@@ -8,12 +9,12 @@ import 'nprogress/nprogress.css'
 NProgress.configure({ showSpinner: false })
 
 const router = createRouter({
-	history: createWebHistory(),
+	history: Setting.routerMode === 'history' ? createWebHistory() : createWebHashHistory(),
 	routes
 })
 
 router.beforeEach((to, from, next) => {
-	NProgress.start()
+	if (Setting.showProgressBar) NProgress.start()
 	// 判断是否需要登录才可以进入
 	if (to.matched.some(_ => _.meta.auth)) {
 		// 这里依据 token 判断是否登录，可视情况修改
@@ -38,7 +39,7 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach(() => {
-	NProgress.done()
+	if (Setting.showProgressBar) NProgress.done()
 })
 
 export default router

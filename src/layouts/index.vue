@@ -17,7 +17,7 @@
 				</div>
 			</el-header>
 			<el-main class="e-layout-content" :class="contentClasses">
-				<e-header-tabs v-if="showTabs" :class="tabsClasses" :style="tabsStyle" />
+				<e-tabs v-if="showTabs" :class="tabsClasses" :style="tabsStyle" />
 				<div class="e-layout-content-main">
 					<router-view v-slot="{ Component, route }">
 						<transition name="fade-top">
@@ -50,7 +50,7 @@ import EHeaderBreadcrumb from './header-breadcrumb'
 import EHeaderFullscreen from './header-fullscreen'
 import EHeaderUser from './header-user'
 import EHeaderSetting from './header-setting'
-import EHeaderTabs from './header-tabs'
+import ETabs from './tabs'
 import ECopyright from '@/components/copyright'
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'

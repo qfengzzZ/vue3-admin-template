@@ -40,7 +40,7 @@ watch(
 				store.commit('menu/setMenuSideAll', menuSider)
 				const filterMenuSide = getMenuSideByName(menuSider, headerName)
 				store.commit('menu/setMenuSide', filterMenuSide)
-				store.commit('menu/setActivePath', to.path)
+				store.commit('menu/setActivePath', to.fullPath)
 			}
 		}
 	},

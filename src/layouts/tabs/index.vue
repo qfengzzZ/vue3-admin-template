@@ -7,11 +7,11 @@
 			<span class="tabs-button tabs-button__next" :class="{ 'tabs-button-hidden': !scrollable }">
 				<SvgIcon icon="arrow-right" />
 			</span>
-			<Draggable :list="tabsList" animation="300" item-key="path" class="tabs-wrap-scroll">
+			<Draggable :list="tabsList" animation="300" item-key="fullPath" class="tabs-wrap-scroll">
 				<template #item="{ element }">
-					<div class="tabs-wrap-scroll-item" :class="{ 'tabs-wrap-scroll-item__active': activePath === element.path }" @click.stop="handleClickItem(element)">
+					<div class="tabs-wrap-scroll-item" :class="{ 'tabs-wrap-scroll-item__active': activePath === element.path }" @click.stop="handleOpenTab(element)">
 						<span class="title">{{ element.meta.title }}</span>
-						<SvgIcon icon="close" @click.stop="handleCloseItem(element)" v-if="!element.meta.affix" />
+						<SvgIcon icon="close" @click.stop="handleCloseTab(element)" v-if="!element.meta.affix" />
 					</div>
 				</template>
 			</Draggable>
@@ -47,10 +47,13 @@ onMounted(() => {
 })
 
 watch(
-	() => route.path,
+	() => route.fullPath,
 	(to, from) => {
 		if (to !== from) {
-			store.commit('page/addTabsList', to)
+			store.commit('page/addTab', route)
+			nextTick(() => {
+				updateScrollable()
+			})
 		}
 	},
 	{
@@ -76,21 +79,33 @@ const updateScrollable = () => {
 const tabsList = computed(() => store.state.page.tabsList)
 const activePath = computed(() => store.state.menu.activePath)
 
-const handleClickItem = item => {
-	router.push({
-		path: item.path
-	})
+const handleOpenTab = item => {
+	router.push(item.path)
+	updateScrollable()
 }
 
-const handleCloseItem = element => {
+const handleCloseTab = element => {
+	if (element.meta.affix) return
 	if (activePath.value === element.path) {
 		const $index = tabsList.value.findIndex(item => item.path === element.path)
-		store.commit('page/removeTabsItem', element)
-		router.push({
-			path: tabsList.value[$index - 1].path
-		})
+		store.commit('page/closeCurrentTab', element)
+		router.push(tabsList.value[$index - 1].path)
 	}
-	store.commit('page/removeTabsItem', element)
+	store.commit('page/closeCurrentTab', element)
+	updateScrollable()
+}
+
+// 关闭其他tabs
+const handleCloseOtherTabs = route => {
+	store.commit('page/closeOtherTabs', route)
+	router.replace(route.fullPath)
+	updateScrollable()
+}
+// 关闭全部tabs
+const handleCloseAllTabs = () => {
+	store.commit('page/closeAllTabs')
+	router.replace('/')
+	updateScrollable()
 }
 
 const actionList = computed(() => {
@@ -128,11 +143,13 @@ const handleClickCommand = val => {
 			handleReload()
 			break
 		case 2:
-			handleCloseItem(route)
+			handleCloseTab(route)
 			break
 		case 3:
+			handleCloseOtherTabs(route)
 			break
 		case 4:
+			handleCloseAllTabs()
 			break
 	}
 }
