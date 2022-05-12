@@ -14,12 +14,12 @@ export default {
 	component: BasicLayout,
 	children: [
 		{
-			path: '/user',
+			path: 'user',
 			name: `${pre}index`,
 			component: () => import('@/pages/table')
 		},
 		{
-			path: '/role',
+			path: 'role',
 			name: `${pre}role`,
 			component: () => import('@/pages/table/table-two')
 		}

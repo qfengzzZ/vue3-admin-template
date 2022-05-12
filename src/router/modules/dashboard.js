@@ -8,26 +8,32 @@ export default {
 	redirect: {
 		name: `${pre}console`
 	},
-	meta: {
-		title: '主控台',
-		affix: true
-	},
 	component: BasicLayout,
 	children: [
 		{
 			path: 'console',
 			name: `${pre}console`,
-			component: () => import(/* dashboard */ '@/pages/dashboard/console')
+			meta: {
+				title: '主控台',
+				affix: true
+			},
+			component: () => import('@/pages/dashboard/console')
 		},
 		{
 			path: 'monitor',
 			name: `${pre}monitor`,
-			component: () => import(/* dashboard */ '@/pages/dashboard/monitor')
+			meta: {
+				title: '监控台'
+			},
+			component: () => import('@/pages/dashboard/monitor')
 		},
 		{
 			path: 'workspace',
 			name: `${pre}workspace`,
-			component: () => import(/* dashboard */ '@/pages/dashboard/workspace')
+			meta: {
+				title: '工作台'
+			},
+			component: () => import('@/pages/dashboard/workspace')
 		}
 	]
 }

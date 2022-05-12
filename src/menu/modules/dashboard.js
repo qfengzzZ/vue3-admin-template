@@ -14,7 +14,7 @@ export default {
 			title: '监控页'
 		},
 		{
-			path: `${pre}workplace`,
+			path: `${pre}workspace`,
 			title: '工作台'
 		}
 	]
