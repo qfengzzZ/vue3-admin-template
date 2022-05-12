@@ -7,7 +7,7 @@ export default [
 		name: 'home'
 	},
 	{
-		path: '/table',
+		path: '/log',
 		title: '日志',
 		hideSide: true,
 		icon: 'settings',

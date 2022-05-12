@@ -19,7 +19,7 @@ const Setting = {
 	// 布局设置
 	layout: {
 		// 顶栏风格
-		headTheme: 'light',
+		headTheme: 'dark',
 		// 侧边栏风格
 		sideTheme: 'dark',
 		// 是否固定侧边栏

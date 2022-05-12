@@ -26,7 +26,6 @@ module.exports = {
 	},
 	// 默认设置: https://github.com/vuejs/vue-cli/tree/dev/packages/@vue/cli-service/lib/config/base.js
 	chainWebpack: config => {
-		console.log(config.plugins)
 		/**
 		 * 删除懒加载模块的 prefetch preload，降低带宽压力
 		 */

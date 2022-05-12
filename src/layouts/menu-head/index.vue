@@ -28,6 +28,7 @@ watch(
 	(to, from) => {
 		if (!Setting.asyncSideMenu) {
 			store.commit('menu/setMenuHead', menuHeader)
+			store.commit('menu/setActivePath', to.path)
 			let path = to.matched[to.matched.length - 1].path
 			let headerName = getHeaderNameByPath(path, menuSider)
 			if (headerName === null) {
@@ -40,7 +41,6 @@ watch(
 				store.commit('menu/setMenuSideAll', menuSider)
 				const filterMenuSide = getMenuSideByName(menuSider, headerName)
 				store.commit('menu/setMenuSide', filterMenuSide)
-				store.commit('menu/setActivePath', to.fullPath)
 			}
 		}
 	},

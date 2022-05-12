@@ -1,6 +1,5 @@
 import dashboard from './modules/dashboard'
-import table from './modules/table'
-import system from './modules/system'
+import log from './modules/log'
 
 /**
  * 在主框架内显示
@@ -14,8 +13,7 @@ const frameIn = [
 		}
 	},
 	dashboard,
-	table,
-	system
+	log
 ]
 
 /**

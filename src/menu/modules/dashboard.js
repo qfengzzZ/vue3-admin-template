@@ -8,14 +8,6 @@ export default {
 		{
 			path: `${pre}console`,
 			title: '主控台'
-		},
-		{
-			path: `${pre}monitor`,
-			title: '监控页'
-		},
-		{
-			path: `${pre}workspace`,
-			title: '工作台'
 		}
 	]
 }

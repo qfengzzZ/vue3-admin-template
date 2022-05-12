@@ -1,6 +1,5 @@
 // 菜单，侧边栏
 import dashboard from './modules/dashboard'
-import system from './modules/system'
-import table from './modules/table'
+import log from './modules/log'
 
-export default [dashboard, system, table]
+export default [dashboard, log]
