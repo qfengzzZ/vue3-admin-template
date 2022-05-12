@@ -1,6 +1,8 @@
-#vue3-admin-template
+# vue3-admin-template
 
 这是使用vue3 + element-plus 搭建的一套后台管理相关项目的模板
+
+对标 iView Pro， 目前实现的功能有：
 
 ## 功能（Functions）
 - 使用vue3最新setup语法糖，使用js语法，降低使用门槛
